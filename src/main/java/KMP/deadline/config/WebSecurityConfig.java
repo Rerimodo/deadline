@@ -1,4 +1,4 @@
-package KMP.deadline.Config;
+package KMP.deadline.config;
 
 import KMP.deadline.domain.User;
 import KMP.deadline.repo.UserRepo;

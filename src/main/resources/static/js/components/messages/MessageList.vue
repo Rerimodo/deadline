@@ -1,6 +1,6 @@
 <template>
     <v-layout align-space-around justify-start column>
-        <message-form :messages="messages" :messageAttr="message" />
+        <message-form :messages="messages" :messageAttr="message" :profile="profile" />
         <message-row v-for="message in sortedMessages"
                      :key="message.id"
                      :message="message"
@@ -15,19 +15,19 @@
     import MessageForm from 'components/messages/MessageForm.vue'
 
     export default {
-        props: ['messages'],
+        props: ['messages', 'profile'], //list of message положенных в frontendDate
         components: {
             MessageRow,
             MessageForm
         },
         data() {
             return {
-                message: null
+                message: null //"текущий" message
             }
         },
         computed: {
             sortedMessages() {
-                return this.messages.sort((a, b) => (a.id - b.id))
+                return this.messages.sort((a, b) => (new Date(a.deadlineDate).getTime() - new Date(b.deadlineDate).getTime()))
             }
         },
         methods: {

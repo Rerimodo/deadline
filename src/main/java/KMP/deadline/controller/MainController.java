@@ -15,6 +15,7 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/")
 public class MainController {
+
     private final MessageRepo messageRepo;
 
 //    @Value("${spring.profiles.active}")
@@ -31,7 +32,9 @@ public class MainController {
 
         if(user != null) {
             data.put("profile", user);
-            data.put("messages", messageRepo.findAll());
+            data.put("messages", messageRepo.findAll()
+//                    ByUserId(Long.parseLong(user.getId()))
+            );
         }
 
         model.addAttribute("frontendData", data);

@@ -1,8 +1,13 @@
 <template>
     <v-card class="my-2">
         <v-card-text primary-title>
-            <i>({{ message.id }})</i>
-            {{ message.text }}
+            <i>({{ message.id }})</i><br/>
+            {{ message.title }} <br/>
+            {{ message.text }} <br/>
+            {{ message.userId }} <br/>
+            {{message.creationDateTime}}<br/>
+            {{message.deadlineDate}}<br/>
+
         </v-card-text>
         <v-card-actions>
             <v-btn value="Edit" @click="edit" small flat round>Edit</v-btn>

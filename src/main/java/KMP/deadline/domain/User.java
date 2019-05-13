@@ -3,6 +3,7 @@ package KMP.deadline.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Data
 public class User implements Serializable {
     @Id
+    @Column(name="ID")
     private String id;
     private String name;
     private String userpic;

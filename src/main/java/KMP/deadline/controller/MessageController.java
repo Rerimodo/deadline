@@ -22,7 +22,7 @@ public class MessageController {
     }
 
     @GetMapping
-    @JsonView(Views.IdName.class)
+//    @JsonView(Views.IdName.class)
     public List<Message> list() {
         return messageRepo.findAll();
     }
@@ -35,7 +35,7 @@ public class MessageController {
 
     @PostMapping
     public Message create(@RequestBody Message message) {
-        message.setCreationDate(LocalDateTime.now());
+        message.setCreationDateTime(LocalDateTime.now());
         return messageRepo.save(message);
     }
 

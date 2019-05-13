@@ -14,7 +14,7 @@
                 <a href="/login">Google</a>
             </v-container>
             <v-container v-if="profile">
-                <messages-list :messages="messages" />
+                <messages-list :messages="messages" :profile="profile" />
             </v-container>
         </v-content>
     </v-app>

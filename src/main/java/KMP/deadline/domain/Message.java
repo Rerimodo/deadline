@@ -1,29 +1,40 @@
 package KMP.deadline.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
-@ToString(of = {"id", "text"})
+@Table(name="task")
+@ToString(of = {"id", "text", "userId", "title"})
 @EqualsAndHashCode(of = {"id"})
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(Views.Id.class)
+//    @JsonView(Views.Id.class)
     private Long id;
-    @JsonView(Views.IdName.class)
+
+    @JoinColumn(name = "usr", referencedColumnName = "ID")
+    private String userId;
+
+//    @JsonView(Views.IdName.class)
     private String text;
+
+    private String title;
 
     @Column(updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonView(Views.FullMessage.class)
-    private LocalDateTime creationDate;
+    private LocalDateTime creationDateTime;
+
+    @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date deadlineDate;
 
     public Long getId() {
         return id;
@@ -31,6 +42,14 @@ public class Message {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getText() {
@@ -41,11 +60,27 @@ public class Message {
         this.text = text;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDateTime getCreationDateTime() {
+        return creationDateTime;
+    }
+
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
+        this.creationDateTime = creationDateTime;
+    }
+
+    public Date getDeadlineDate() {
+        return deadlineDate;
+    }
+
+    public void setDeadlineDate(Date deadlineDate) {
+        this.deadlineDate = deadlineDate;
     }
 }
