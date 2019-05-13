@@ -1,6 +1,8 @@
 package KMP.deadline.controller;
 
 import KMP.deadline.domain.User;
+import KMP.deadline.repo.MessageRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +14,22 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    @GetMapping
-    public String main(Model model, @AuthenticationPrincipal User user){
-        HashMap<Object,Object> data = new HashMap<>();
+    private final MessageRepo messageRepo;
 
-        data.put("profile",null);
-        data.put("messages",null);
+    @Autowired
+    public MainController(MessageRepo messageRepo) {
+        this.messageRepo = messageRepo;
+    }
+
+    @GetMapping
+    public String main(Model model, @AuthenticationPrincipal User user) {
+        HashMap<Object, Object> data = new HashMap<>();
+
+        data.put("profile", user);
+        data.put("messages", messageRepo.findAll());
 
         model.addAttribute("frontendData", data);
+
         return "index";
     }
 }

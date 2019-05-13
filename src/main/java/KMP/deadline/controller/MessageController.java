@@ -1,9 +1,9 @@
 package KMP.deadline.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import KMP.deadline.domain.Message;
 import KMP.deadline.domain.Views;
 import KMP.deadline.repo.MessageRepo;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +34,13 @@ public class MessageController {
     }
 
     @PostMapping
-    public Message save(@RequestBody Message message) {
+    public Message create(@RequestBody Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }
 
     @PutMapping("{id}")
-    public Message upd(
+    public Message update(
             @PathVariable("id") Message messageFromDb,
             @RequestBody Message message
     ) {
@@ -50,7 +50,7 @@ public class MessageController {
     }
 
     @DeleteMapping("{id}")
-    public void del(@PathVariable("id") Message message) {
+    public void delete(@PathVariable("id") Message message) {
         messageRepo.delete(message);
     }
 }

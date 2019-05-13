@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="message")
+@Table
 @ToString(of = {"id", "text"})
 @EqualsAndHashCode(of = {"id"})
 public class Message {
